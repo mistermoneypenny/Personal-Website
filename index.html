@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David C. Lee</title>
+  <style>
+    :root {
+      --navy: #1a2535;
+      --navy-light: #243448;
+      --gold: #ffffff;
+      --gold-light: rgba(255,255,255,0.75);
+      --slate: #4a5568;
+      --light-bg: #f7f8fa;
+      --white: #ffffff;
+      --text: #2d3748;
+      --text-light: #718096;
+      --border: #e2e8f0;
+      --tag-bg: #1a2535;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--light-bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .nav-brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: var(--white);
+      padding: 6rem 3rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.03) 60px,
+        rgba(255,255,255,0.03) 61px
+      );
+    }
+    .hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
+    .hero h1 {
+      font-size: 3rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-transform: uppercase;
+      font-weight: normal;
+    }
+    .hero h1 span { color: rgba(255,255,255,0.65); }
+    .hero-title {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin: 0.6rem 0 1.8rem;
+    }
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.5rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+    .hero-contacts a, .hero-contacts span {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .hero-contacts a:hover { color: var(--white); }
+    .hero-divider {
+      width: 60px;
+      height: 2px;
+      background: rgba(255,255,255,0.4);
+      margin: 2rem auto 0;
+    }
+
+    /* ── SECTIONS ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-title {
+      font-size: 0.78rem;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      opacity: 0.55;
+    }
+    .section-heading {
+      font-size: 1.8rem;
+      color: var(--navy);
+      font-weight: normal;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── RESUME: SUMMARY ── */
+    .summary-text {
+      font-size: 1.0rem;
+      color: var(--slate);
+      line-height: 1.85;
+      background: var(--white);
+      border-left: 4px solid var(--navy);
+      padding: 1.4rem 1.8rem;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    /* ── RESUME: EXPERIENCE ── */
+    .experience-block { margin-bottom: 2.8rem; }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.15rem;
+    }
+    .exp-company {
+      font-size: 1.05rem;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+    }
+    .exp-period {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+    .exp-role {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--navy);
+      opacity: 0.7;
+      margin-bottom: 0.8rem;
+    }
+    .exp-location {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+    }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets > li {
+      padding: 0.25rem 0 0.25rem 1.2rem;
+      position: relative;
+      font-size: 0.93rem;
+      color: var(--text);
+    }
+    .exp-bullets > li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      font-size: 0.8rem;
+      top: 0.4rem;
+    }
+
+    /* Transactions sub-section */
+    .transactions-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      opacity: 0.6;
+      margin: 1.2rem 0 0.8rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+    }
+    .transaction-item {
+      margin-bottom: 1.2rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .transaction-name {
+      background: var(--navy);
+      padding: 0.55rem 1rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .transaction-sub {
+      padding: 0.6rem 1rem 0.8rem;
+    }
+    .transaction-sub-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin: 0.6rem 0 0.3rem;
+    }
+    .transaction-bullets { list-style: none; padding: 0; }
+    .transaction-bullets li {
+      padding: 0.15rem 0 0.15rem 1rem;
+      position: relative;
+      font-size: 0.87rem;
+      color: var(--slate);
+    }
+    .transaction-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      opacity: 0.5;
+    }
+
+    /* DZ Bank deals */
+    .deals-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin: 0.8rem 0;
+    }
+    .deal-chip {
+      background: var(--navy);
+      border-left: 3px solid rgba(255,255,255,0.3);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── RESUME: EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    @media (max-width: 600px) { .edu-grid { grid-template-columns: 1fr; } }
+    .edu-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--navy);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .edu-school {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+    .edu-degree {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--slate);
+      margin: 0.3rem 0;
+    }
+    .edu-meta {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ── RESUME: QUALIFICATIONS ── */
+    .qual-list { list-style: none; padding: 0; }
+    .qual-list li {
+      padding: 0.5rem 0 0.5rem 1.4rem;
+      position: relative;
+      font-size: 0.93rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .qual-list li:last-child { border-bottom: none; }
+    .qual-list li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      opacity: 0.4;
+      font-size: 0.6rem;
+      top: 0.75rem;
+    }
+
+    /* ── RESUME: SKILLS ── */
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .skill-tag {
+      background: var(--navy);
+      color: rgba(255,255,255,0.9);
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── MODELS SECTION ── */
+    #models { background: var(--white); }
+    .models-intro {
+      font-size: 0.95rem;
+      color: var(--slate);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .model-card {
+      background: var(--light-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .model-card:hover {
+      box-shadow: 0 6px 24px rgba(15,31,61,0.12);
+      transform: translateY(-2px);
+    }
+    .model-icon {
+      width: 44px;
+      height: 44px;
+      background: #1d6f42;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .model-icon svg { width: 24px; height: 24px; fill: white; }
+    .model-name {
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .model-type {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .model-download {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--navy);
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      padding: 2rem;
+      letter-spacing: 0.05em;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1.2rem; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .hero h1 { font-size: 2rem; }
+      .section { padding: 3rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">David C. Lee</a>
+  <ul class="nav-links">
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#models">Models</a></li>
+    <li><a href="mailto:davidconnorlee@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>David C. <span>Lee</span></h1>
+    <p class="hero-title">Energy &amp; Infrastructure Investment</p>
+    <div class="hero-contacts">
+      <span>
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        London, UK
+      </span>
+      <a href="tel:+447555802921">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
+        +44 (0)7555 802921
+      </a>
+      <a href="mailto:davidconnorlee@gmail.com">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        davidconnorlee@gmail.com
+      </a>
+      <a href="https://davidconnorlee.com" target="_blank">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm-1 17.93V18c0-.55-.45-1-1-1H8v-2c0-.55-.45-1-1-1H4.07A8.01 8.01 0 014 12c0-.34.02-.67.07-1H6c.55 0 1-.45 1-1V8h2c.55 0 1-.45 1-1V4.07A8 8 0 0119.93 11H18c-.55 0-1 .45-1 1v2c0 .55-.45 1-1 1h-2c-.55 0-1 .45-1 1v2.93z"/></svg>
+        davidconnorlee.com
+      </a>
+    </div>
+    <div class="hero-divider"></div>
+  </div>
+</header>
+
+<!-- ═══════════ RESUME ═══════════ -->
+<section id="resume" class="section">
+
+  <!-- Professional Summary -->
+  <p class="section-title">About</p>
+  <h2 class="section-heading">Professional Summary</h2>
+  <p class="summary-text">
+    Energy and infrastructure investment professional with six years of experience in origination and execution across both private equity and debt transactions. Extensive exposure across the investment lifecycle – valuation modelling, due diligence, legal and financial structuring, term sheet and documentation negotiation/execution – and to a diverse array of sectors (renewables, transport, digital) and EMEA geographies. Proven track record in driving value creation at asset level by influencing corporate strategy and business plan formation, optimizing capital structures, and leading internal valuation workstreams.
+  </p>
+
+  <!-- Employment -->
+  <p class="section-title" style="margin-top:3rem;">Career</p>
+  <h2 class="section-heading">Employment History</h2>
+
+  <!-- Columbia Threadneedle -->
+  <div class="experience-block">
+    <div class="exp-header">
+      <span class="exp-company">Columbia Threadneedle</span>
+      <span class="exp-period">February 2022 – Present</span>
+    </div>
+    <div class="exp-role">Investment Manager, European Sustainable Infrastructure Fund</div>
+    <div class="exp-location">London, UK</div>
+    <ul class="exp-bullets">
+      <li>Originating, screening, and executing new investment opportunities in the mid-market European sustainable energy and infrastructure space (wind, solar, digital, transport), with participation across bidding strategy, deal structuring, due diligence, commercial negotiation and legal closing.</li>
+      <li>Developing LBO and acquisition models from scratch to quantify the equity return and valuation of early-stage opportunities, as well as debt sizing and credit models associated with the refinancing of portfolio assets.</li>
+      <li>Drafting and presenting deal screening and investment approval memoranda to the IC and the fund's investors, including acquisition opportunities, restructuring proposals, and refinancings.</li>
+      <li>Managing the financial, legal, and technical due diligence workstreams by coordinating advisors and synthesizing key risks and findings to internal stakeholders.</li>
+      <li>Driving value of portfolio companies by aiding in the formulation of business plans, delivery of operational strategy, and internal NAV calculation.</li>
+      <li>Leading the refinancing process of existing portfolio assets, including debt sizing, negotiating term sheets, and executing long-form documentation.</li>
+    </ul>
+
+    <p class="transactions-label">Selected Transactions</p>
+
+    <div class="transaction-item">
+      <div class="transaction-name">Oakmont — 100 MW Windfarm Portfolio, Sweden (4 Assets, Closed)</div>
+      <div class="transaction-sub">
+        <p class="transaction-sub-label">Acquisition</p>
+        <ul class="transaction-bullets">
+          <li>Supported deal structuring analysis to determine ideal acquisition capital structure</li>
+          <li>Negotiated Share Purchase Agreement (SPA) and transaction structure, ensuring alignment with regulatory requirements and investment objectives</li>
+        </ul>
+        <p class="transaction-sub-label">Refinancing</p>
+        <ul class="transaction-bullets">
+          <li>Led refi process without an advisor, including DD coordination, commercial negotiation, and term sheet finalization, resulting in a successful debt raise</li>
+          <li>Drove the formulation of a bankable PPA strategy</li>
+          <li>Built debt sizing and financial close model</li>
+          <li>Drafted teaser, IM, and other marketing materials, as well as IC paper</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transaction-item">
+      <div class="transaction-name">Lefdal Mine Datacenter — 200MW Colocation Data Center, Norway</div>
+      <div class="transaction-sub">
+        <p class="transaction-sub-label">Refinancing</p>
+        <ul class="transaction-bullets">
+          <li>Led bilateral negotiations with prospective lender pool encompassing capital structure and Term Sheet finalization, resulting in a raise of EUR 100m providing necessary growth capital to deliver on the investment case</li>
+          <li>Coordinated the development of the due diligence package (commercial, legal, finance) underpinning the transaction</li>
+          <li>Supervised the financial model build process</li>
+        </ul>
+        <p class="transaction-sub-label">Asset Management</p>
+        <ul class="transaction-bullets">
+          <li>Helped drive a 6x uplift in company valuation post-acquisition by spearheading a comprehensive business plan revision and providing oversight of implementation in tandem with management</li>
+          <li>Continually assessing the suitability of powered land greenfield opportunities to facilitate further capacity expansion</li>
+          <li>Influenced executive team selection and recruitment, in addition to designing long-term incentive arrangements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transaction-item">
+      <div class="transaction-name">Storrun Vindkraft — 30 MW Windfarm, Sweden (Disposal)</div>
+      <div class="transaction-sub">
+        <ul class="transaction-bullets">
+          <li>Prepared and presented investment memoranda to the IC and completed modelling and returns analysis in preparation for disposal</li>
+          <li>Coordinated the various advisory workstreams, financial model build, and the preparation of the due diligence package</li>
+          <li>Helped formulate go-to-market strategy and influenced the composition of the prospective lender universe</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DZ Bank -->
+  <div class="experience-block">
+    <div class="exp-header">
+      <span class="exp-company">DZ Bank</span>
+      <span class="exp-period">January 2019 – February 2022</span>
+    </div>
+    <div class="exp-role">Project Finance Associate, EMEA</div>
+    <div class="exp-location">London, UK</div>
+    <ul class="exp-bullets">
+      <li>Supported the origination and execution of lending transactions spanning renewables and conventional energy in Europe and the Middle East.</li>
+      <li>Conducted financial, regulatory, and environmental due diligence to assess risk levels associated with financing greenfield infrastructure projects and the acquisition of brownfield exposure.</li>
+      <li>Management of a portfolio of existing investments (power, renewables, social, oil &amp; gas, transport) by liaising with market participants, sponsors, and legal and technical advisors to monitor and optimize asset performance.</li>
+      <li>Analysed and constructed financial models to generate downside sensitivity analysis and credit ratios used in the credit application process.</li>
+    </ul>
+    <p class="transactions-label">Selected Deals</p>
+    <div class="deals-grid">
+      <div class="deal-chip"><strong>St. Nazaire Offshore Wind</strong> — France | EUR 2bn | 480 MW</div>
+      <div class="deal-chip"><strong>Jazan IGCC</strong> — Saudi Arabia | EUR 12bn | Integrated Gasification Combined Cycle Power Plant</div>
+      <div class="deal-chip"><strong>Neart na Gaoithe Offshore Wind</strong> — UK | EUR 2.1bn | 450 MW</div>
+    </div>
+  </div>
+
+  <!-- Fitch Group -->
+  <div class="experience-block">
+    <div class="exp-header">
+      <span class="exp-company">Fitch Group</span>
+      <span class="exp-period">July 2016 – December 2018</span>
+    </div>
+    <div class="exp-role">Energy &amp; Infrastructure Analyst, EMEA</div>
+    <div class="exp-location">London, UK</div>
+    <ul class="exp-bullets">
+      <li>Developed and maintained project finance models to aid in forecasting and analytical processes, integrating live Bloomberg functionality and internal macroeconomic/industry data across solar, wind, and upstream extractive industries.</li>
+      <li>Oversaw the creation of indices that quantify the risks associated with investing in an infrastructure asset in a particular geography.</li>
+      <li>Advised and conducted presentations for clients on a range of energy and infrastructure market trends across Europe and the Middle East — clients ranged from infrastructure investment funds to governments and major international construction companies.</li>
+    </ul>
+  </div>
+
+  <!-- Education -->
+  <p class="section-title">Academic</p>
+  <h2 class="section-heading">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-school">ESCP Europe</div>
+      <div class="edu-degree">MSc in Energy Finance — Merit</div>
+      <div class="edu-meta">2014 – 2016 &nbsp;·&nbsp; London &amp; Paris</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">University of California, Santa Barbara</div>
+      <div class="edu-degree">Bachelor of International Relations</div>
+      <div class="edu-meta">Santa Barbara, USA</div>
+    </div>
+  </div>
+
+  <!-- Qualifications -->
+  <p class="section-title" style="margin-top:3rem;">Credentials</p>
+  <h2 class="section-heading">Additional Qualifications</h2>
+  <ul class="qual-list">
+    <li>Fluent in German (reading, writing, and speaking). American, British, and German citizen.</li>
+    <li>Advanced knowledge of Microsoft Excel, Word, PowerPoint, Access, and Bloomberg.</li>
+    <li>Board Experience: Center for Natural Lands Management (a nature conservancy with preserves throughout the US West Coast).</li>
+    <li>Certified Public Private Partnership Professional (CP3P) — World Bank, EBRD, ADB, IaDB, IsDB.</li>
+  </ul>
+
+  <!-- Skills -->
+  <p class="section-title" style="margin-top:3rem;">Expertise</p>
+  <h2 class="section-heading">Key Skills</h2>
+  <div class="skills-cloud">
+    <span class="skill-tag">Acquisition Finance</span>
+    <span class="skill-tag">Acquisitions</span>
+    <span class="skill-tag">Asset Management</span>
+    <span class="skill-tag">Direct Investment</span>
+    <span class="skill-tag">Disposals</span>
+    <span class="skill-tag">Due Diligence</span>
+    <span class="skill-tag">Energy</span>
+    <span class="skill-tag">Equity Execution</span>
+    <span class="skill-tag">Financial Modelling</span>
+    <span class="skill-tag">Financial Services</span>
+    <span class="skill-tag">Financing</span>
+    <span class="skill-tag">Infrastructure</span>
+    <span class="skill-tag">Investment Analysis</span>
+    <span class="skill-tag">LBO Modelling</span>
+    <span class="skill-tag">Negotiation</span>
+    <span class="skill-tag">Networking</span>
+    <span class="skill-tag">Origination</span>
+    <span class="skill-tag">Portfolio Management</span>
+    <span class="skill-tag">Private Markets</span>
+    <span class="skill-tag">Refinancing</span>
+    <span class="skill-tag">Renewables</span>
+    <span class="skill-tag">Restructuring</span>
+    <span class="skill-tag">Risk Management</span>
+    <span class="skill-tag">Structuring</span>
+    <span class="skill-tag">Transportation</span>
+    <span class="skill-tag">Valuations</span>
+  </div>
+
+</section>
+
+<hr class="section-divider" />
+
+<!-- ═══════════ MODELS ═══════════ -->
+<section id="models" style="background: var(--white);">
+  <div class="section">
+    <p class="section-title">Financial Modelling</p>
+    <h2 class="section-heading">Excel Models</h2>
+    <p class="models-intro">
+      A selection of financial models built across infrastructure and natural resource sectors, demonstrating full-cycle valuation expertise — from greenfield project finance to acquisition structuring. Click any card to download.
+    </p>
+    <div class="models-grid">
+
+      <a class="model-card" href="Gas Pipeline Acquisition.xlsm" download>
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="model-name">Gas Pipeline Acquisition</div>
+          <div class="model-type">LBO / Acquisition Model · .xlsm</div>
+        </div>
+        <div class="model-download">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
+          Download
+        </div>
+      </a>
+
+      <a class="model-card" href="Greenfield Offshore Wind Valuation.xlsm" download>
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="model-name">Greenfield Offshore Wind Valuation</div>
+          <div class="model-type">Project Finance Model · .xlsm</div>
+        </div>
+        <div class="model-download">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
+          Download
+        </div>
+      </a>
+
+      <a class="model-card" href="Greenfield Solar PV Valuation Model.xlsm" download>
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="model-name">Greenfield Solar PV Valuation Model</div>
+          <div class="model-type">Project Finance Model · .xlsm</div>
+        </div>
+        <div class="model-download">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
+          Download
+        </div>
+      </a>
+
+      <a class="model-card" href="Manganese Mine.xlsm" download>
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="model-name">Manganese Mine</div>
+          <div class="model-type">Natural Resources Model · .xlsm</div>
+        </div>
+        <div class="model-download">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
+          Download
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>David C. Lee &nbsp;·&nbsp; <a href="mailto:davidconnorlee@gmail.com">davidconnorlee@gmail.com</a> &nbsp;·&nbsp; London, UK</p>
+</footer>
+
+</body>
+</html>
