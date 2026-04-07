@@ -418,6 +418,183 @@
       letter-spacing: 0.05em;
     }
 
+    /* ── JOURNAL ── */
+    #journal { background: var(--light-bg); }
+    .journal-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .journal-layout { grid-template-columns: 1fr; } }
+
+    .journal-archive {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .journal-archive-header {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .j-archive-count {
+      background: rgba(255,255,255,0.15);
+      border-radius: 99px;
+      padding: 1px 7px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .journal-archive-list {
+      max-height: 340px;
+      overflow-y: auto;
+    }
+    .journal-archive-list::-webkit-scrollbar { width: 3px; }
+    .journal-archive-list::-webkit-scrollbar-thumb { background: var(--border); }
+    .j-archive-item {
+      padding: 0.55rem 0.9rem;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .j-archive-item:last-child { border-bottom: none; }
+    .j-archive-item:hover { background: var(--light-bg); }
+    .j-archive-item.active { background: #eef1f8; border-left: 3px solid var(--navy); }
+    .j-archive-item .j-item-date {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: var(--navy);
+    }
+    .j-archive-item .j-item-today {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .j-archive-item .j-item-preview {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .j-archive-empty {
+      padding: 1.2rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .journal-write {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+    .journal-write-header {
+      background: var(--navy);
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .j-write-title {
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: bold;
+      color: var(--white);
+    }
+    .j-write-title .j-day {
+      color: rgba(255,255,255,0.6);
+      font-weight: normal;
+    }
+    .j-btn-group { display: flex; gap: 0.5rem; align-items: center; }
+    .j-btn {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .j-btn-save {
+      background: var(--white);
+      color: var(--navy);
+    }
+    .j-btn-save:hover { background: #e8ecf5; }
+    .j-btn-save:disabled { opacity: 0.4; cursor: not-allowed; }
+    .j-btn-back {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.25) !important;
+    }
+    .j-btn-back:hover { color: white; border-color: rgba(255,255,255,0.5) !important; }
+    .j-btn-delete {
+      background: transparent;
+      color: #fca5a5;
+      border: 1px solid rgba(252,165,165,0.3) !important;
+    }
+    .j-btn-delete:hover { background: rgba(252,165,165,0.1); }
+
+    .j-textarea {
+      width: 100%;
+      min-height: 260px;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+      padding: 1.4rem 1.4rem;
+      resize: vertical;
+      outline: none;
+      background: var(--white);
+    }
+    .j-textarea::placeholder { color: var(--text-light); }
+
+    .j-read-content {
+      padding: 1.4rem;
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .journal-footer {
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-light);
+    }
+    .j-saved-status { display: flex; align-items: center; gap: 5px; }
+    .j-saved-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+
     /* ── FOOTER ── */
     footer {
       background: var(--navy);
@@ -447,6 +624,7 @@
   <ul class="nav-links">
     <li><a href="#resume">Resume</a></li>
     <li><a href="#models">Models</a></li>
+    <li><a href="#journal">Journal</a></li>
     <li><a href="mailto:davidconnorlee@gmail.com">Contact</a></li>
   </ul>
 </nav>
@@ -710,6 +888,19 @@
         </div>
       </a>
 
+      <a class="model-card" href="Copper Mine Valuation.xlsm" download>
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="model-name">Copper Mine Valuation</div>
+          <div class="model-type">Natural Resources Model · .xlsm</div>
+        </div>
+        <div class="model-download">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </div>
+      </a>
+
       <a class="model-card" href="Manganese Mine.xlsm" download>
         <div class="model-icon">
           <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -728,10 +919,167 @@
   </div>
 </section>
 
+<!-- ═══════════ JOURNAL ═══════════ -->
+<hr class="section-divider" />
+<section id="journal">
+  <div class="section">
+    <p class="section-title">Personal</p>
+    <h2 class="section-heading">Daily Journal</h2>
+    <div class="journal-layout">
+      <div class="journal-archive">
+        <div class="journal-archive-header">
+          Archive <span class="j-archive-count" id="jCount">0</span>
+        </div>
+        <div class="journal-archive-list" id="jArchiveList">
+          <div class="j-archive-empty">No entries yet.</div>
+        </div>
+      </div>
+      <div class="journal-write" id="jWritePanel">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p>David C. Lee &nbsp;·&nbsp; <a href="mailto:davidconnorlee@gmail.com">davidconnorlee@gmail.com</a> &nbsp;·&nbsp; London, UK</p>
 </footer>
 
+<script>
+  const J_KEY = 'dcl_journal';
+  let jViewDate = null; // null = write mode (today)
+
+  function jLoad() {
+    try { return JSON.parse(localStorage.getItem(J_KEY) || '{}'); } catch { return {}; }
+  }
+  function jSave(dateKey, text) {
+    const d = jLoad();
+    if (text.trim() === '') { delete d[dateKey]; } else { d[dateKey] = text; }
+    localStorage.setItem(J_KEY, JSON.stringify(d));
+  }
+  function jDelete(dateKey) {
+    const d = jLoad(); delete d[dateKey];
+    localStorage.setItem(J_KEY, JSON.stringify(d));
+  }
+  function jTodayKey() {
+    return new Date().toISOString().slice(0, 10);
+  }
+  function jFmtShort(k) {
+    const [y,m,d] = k.split('-').map(Number);
+    return new Date(y,m-1,d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  }
+  function jDayName(k) {
+    const [y,m,d] = k.split('-').map(Number);
+    return new Date(y,m-1,d).toLocaleDateString('en-US',{weekday:'long'});
+  }
+  function jWordCount(t) { return t.trim() === '' ? 0 : t.trim().split(/\s+/).length; }
+  function jEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function jRenderArchive() {
+    const entries = jLoad();
+    const keys = Object.keys(entries).sort((a,b) => b.localeCompare(a));
+    document.getElementById('jCount').textContent = keys.length;
+    const list = document.getElementById('jArchiveList');
+    if (keys.length === 0) {
+      list.innerHTML = '<div class="j-archive-empty">No entries yet.<br>Write something today.</div>';
+      return;
+    }
+    const today = jTodayKey();
+    list.innerHTML = keys.map(k => {
+      const isToday = k === today;
+      const isActive = jViewDate === k || (jViewDate === null && isToday);
+      const preview = entries[k].slice(0,60).replace(/\n/g,' ');
+      return `<div class="j-archive-item${isActive?' active':''}" data-key="${k}">
+        ${isToday ? '<div class="j-item-today">Today</div>' : ''}
+        <div class="j-item-date">${jFmtShort(k)}</div>
+        <div class="j-item-preview">${preview || '—'}</div>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.j-archive-item').forEach(el => {
+      el.addEventListener('click', () => {
+        jViewDate = el.dataset.key === jTodayKey() ? null : el.dataset.key;
+        jRenderPanel();
+        jRenderArchive();
+      });
+    });
+  }
+
+  function jRenderPanel() {
+    if (jViewDate === null) { jRenderWrite(); } else { jRenderRead(jViewDate); }
+  }
+
+  function jRenderWrite() {
+    const key = jTodayKey();
+    const existing = jLoad()[key] || '';
+    const panel = document.getElementById('jWritePanel');
+    panel.innerHTML = `
+      <div class="journal-write-header">
+        <span class="j-write-title"><span class="j-day">${jDayName(key)}</span> — ${jFmtShort(key)}</span>
+        <div class="j-btn-group">
+          <span id="jSavedStatus" style="font-family:Arial,sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);display:none;align-items:center;gap:5px;">
+            <span style="width:6px;height:6px;background:#4ade80;border-radius:50%;display:inline-block;"></span>Saved
+          </span>
+          <button class="j-btn j-btn-save" id="jBtnSave" disabled>Save</button>
+        </div>
+      </div>
+      <textarea class="j-textarea" id="jTextarea" placeholder="What happened today?">${existing}</textarea>
+      <div class="journal-footer">
+        <span id="jWords">${jWordCount(existing)} words</span>
+        <span id="jLastSaved" style="color:#718096;">${existing ? 'Entry saved' : ''}</span>
+      </div>`;
+
+    const ta = document.getElementById('jTextarea');
+    const btn = document.getElementById('jBtnSave');
+    const words = document.getElementById('jWords');
+    const lastSaved = document.getElementById('jLastSaved');
+    const savedStatus = document.getElementById('jSavedStatus');
+    let original = existing;
+
+    ta.addEventListener('input', () => {
+      words.textContent = jWordCount(ta.value) + ' words';
+      btn.disabled = ta.value === original;
+      if (ta.value !== original) { savedStatus.style.display = 'none'; lastSaved.textContent = ''; }
+    });
+    btn.addEventListener('click', () => {
+      jSave(key, ta.value);
+      original = ta.value;
+      btn.disabled = true;
+      savedStatus.style.display = 'flex';
+      lastSaved.textContent = 'Saved ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      jRenderArchive();
+    });
+    ta.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); if (!btn.disabled) btn.click(); }
+    });
+  }
+
+  function jRenderRead(dateKey) {
+    const text = jLoad()[dateKey] || '';
+    const panel = document.getElementById('jWritePanel');
+    panel.innerHTML = `
+      <div class="journal-write-header">
+        <span class="j-write-title"><span class="j-day">${jDayName(dateKey)}</span> — ${jFmtShort(dateKey)}</span>
+        <div class="j-btn-group">
+          <button class="j-btn j-btn-back" id="jBtnBack">← Today</button>
+          <button class="j-btn j-btn-delete" id="jBtnDelete">Delete</button>
+        </div>
+      </div>
+      <div class="j-read-content">${jEsc(text)}</div>
+      <div class="journal-footer"><span>${jWordCount(text)} words</span></div>`;
+
+    document.getElementById('jBtnBack').addEventListener('click', () => {
+      jViewDate = null; jRenderPanel(); jRenderArchive();
+    });
+    document.getElementById('jBtnDelete').addEventListener('click', () => {
+      if (confirm('Delete entry for ' + jFmtShort(dateKey) + '?')) {
+        jDelete(dateKey); jViewDate = null; jRenderPanel(); jRenderArchive();
+      }
+    });
+  }
+
+  jRenderArchive();
+  jRenderPanel();
+</script>
 </body>
 </html>
